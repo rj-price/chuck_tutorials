@@ -8,6 +8,14 @@ read age
 
 echo "Hello $name, you are $age years old."
 
+# Environemental variables
+: '
+echo $PWD
+echo $SHELL
+echo $USER
+echo $LOCALHOST
+'
+
 # Create own environmental variables
 : '
 To create your own environmental variables, add the following to .bashrc:
@@ -27,7 +35,23 @@ echo $(( 3 % 4 ))
 
 '
 
-sleep 2
+sleep 1
+
+echo " "
+echo "Calculating"
+echo ".........."
+sleep 1
+echo "**........"
+sleep 1
+echo "****......"
+sleep 1
+echo "******...."
+sleep 1
+echo "********.."
+sleep 1
+echo "**********"
+echo " "
+sleep 1
 
 getrich=$(( ($RANDOM % 15 ) + $age ))
-echo "You'll be a millionaire at $getrich."
+echo "$name, you'll be a millionaire at age $getrich."
