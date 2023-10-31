@@ -6,3 +6,4 @@ NetWork Chuck YouTube tutorials.
 - EP 1: himum.sh
 - EP 2: bestdayever.sh
 - EP 3: getrichquick.sh
+- EP 4: eldenring.sh
