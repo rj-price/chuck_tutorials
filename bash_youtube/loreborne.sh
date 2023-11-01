@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # TO DO:
+# Intro to game ("Welcome to Loreborne, a game ...").
+# Add "Press ENTER to continue" sections.
 #! Wrap whole game in while loop to allow player to continue
 #! Add random chance of retaliation after attack
 #! Add in damage multiplier if chose not to attack, but include option to heal
@@ -19,10 +21,20 @@ echo "  ██    ▄███▄   ▄██ ██     ██▄    ▄ ██
 echo "██████████ ▀█████▀▄████▄    ▀█████▀ █▀█████▀   ▀█████▀▄████▄  ▄████  ████▄ ▀█████▀"
 echo "                                                                                  "
 
-echo "Welcome traveller. Please select your starting class:
-1 - Knight
-2 - Hunter
-3 - Thief"
+echo -e "In the world of Loreborne, an ancient evil plagues the land. Eldritch terrors roam
+the deserted villages, looking for their next victim. A lone traveller seeks revenge...\n"
+
+read -p "Press ENTER to start..."
+
+echo ""
+
+echo -e "You enter a tavern in one of the few populated villages. The handful of patrons turn
+from their tankards and eye you with suspicion.You approach the bar with caution...\n"
+
+echo "BAR KEEP: Welcome traveller. Please select your starting class:
+1 - Knight (HP: 10, ATTACK: 20)
+2 - Hunter (HP: 15, ATTACK: 15)
+3 - Thief (HP: 20, ATTACK: 10)" 
 
 read class
 
@@ -45,17 +57,24 @@ case $class in
         ;;
 esac
 
-echo -e "Hello, $type. Your hp is $hp and your attack is $attack.\n"
+echo -e "Hello, $type. Your HP is $hp and your ATTACK is $attack.\n"
 
-echo -e "Story type stuff goes here...\n"
+sleep 2
 
+read -p "Press ENTER to leave the tavern and continue on your travels..."
+echo ""
 sleep 2
 
 # First beast battle 
 beast_hp=30
 beast_attack=1
 
-echo "Your first beast approaches."
+echo "As you walk from the village, an eerie feeling of foreboading settles upon you."
+sleep 2
+echo "The path skirts a dark wood. Something moves inside..."
+sleep 2
+echo "A ragged wolf-like creature emerges from the darkness. It's red eyes stare at you,
+fangs bared, slathering and ready to pounce..."
 
 while [ $beast_hp -gt 0 ];
 do
@@ -77,6 +96,7 @@ do
         hp=$(( $hp - $beast_attack ))
         echo "The beast's hp is $beast_hp, your hp is $hp."
     fi
+
 done
 
 sleep 1
