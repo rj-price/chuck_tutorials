@@ -137,7 +137,6 @@ fangs emerges. It's a guardian of the ancient evil, and it stands in your way."
         battle_loop
 
         # Second inventory chance
-
         sleep 2
         echo "Amid the chaos of battle, you notice a hidden stash beneath a nearby rock:
         
@@ -166,8 +165,6 @@ fangs emerges. It's a guardian of the ancient evil, and it stands in your way."
         echo -e "After defeating the guardian, you move on from the riverbank. The path leads to a 
 forsaken village square. The silence is eerie, and the moonlight casts long shadows."
 
-        # Third enemy encounter???
-
         # Boss battle 
         beast_hp=80
         beast_attack=10
@@ -181,9 +178,18 @@ battle, and your heart races as you prepare to face this ultimate challenge."
         battle_loop
 
         # Conclusion
-        echo "With the matriarch of the evil plagues slain, peace will return to this land. 
+        echo -e "With the matriarch of the evil plagues slain, peace will return to this land. 
 You, $type, fought valiantly and fulfilled your quest for revenge. The people of Loreborne 
-will forever sing of your heroic actions, and your name will be remembered throughout history."
+will forever sing of your heroic actions, and your name will be remembered throughout history.\n"
+
+        sleep 2
+
+        read -p "Do you want to play again? (y/n): " restart_choice
+        if [ "$restart_choice" == "y" ]; then
+            reset_game
+        else
+            exit 0
+        fi
 
     done
 }
