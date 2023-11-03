@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# TO DO:
-# Intro to game ("Welcome to Loreborne, a game ...").
-# Add "Press ENTER to continue" sections.
-# Wrap whole game in while loop to allow player to continue
-# Add random chance of retaliation after attack
-# Add battle function to reuse code
-# Add in damage multiplier if chose not to attack
-#! Add inventory and option to heal in battle
-#Add in hp and attack attributes to battles
-#! Develop story
-
 # Welcome
 
 echo "                                    ▄▄                                            "
@@ -37,17 +26,28 @@ game_loop() {
     while [ $hp -gt 0 ]; do
 
         read -p "Press ENTER to start..."
-        echo ""
+        clear
 
-        echo -e "You enter a tavern in one of the few populated villages. The handful of patrons turn
-from their tankards and eye you with suspicion.You approach the bar with caution...\n"
+        echo -e "You enter a dimly lit tavern in one of the few populated villages. The handful of 
+patrons turn from their tankards and eye you with suspicion. The tavern is a haven of shadows and 
+secrecy, with hushed whispers and wary glances. You approach the bar with caution..."
 
-        echo "BAR KEEP: Welcome traveller. Please select your starting class:
-        1 - Knight (HP: 10, ATTACK: 20)
-        2 - Hunter (HP: 15, ATTACK: 15)
-        3 - Thief (HP: 20, ATTACK: 10)" 
+        echo -e "\nBAR KEEP: Welcome, traveler. It's not often we see new faces in these troubled 
+times. What brings you to our desolate corner of the world?
 
-        read class
+        1 - I am a KNIGHT (HP: 10, ATTACK: 20), a loyal protector of the realm, sworn to defend it 
+        from the ancient evil that plagues the land. My training and bravery have brought me to this 
+        fateful quest for revenge.
+
+        2 - As a HUNTER (HP: 15, ATTACK: 15), I am skilled in tracking and combat. The ancient evil 
+        has taken something precious from me, and I am embarking on this journey to reclaim what was 
+        I have lost.
+
+        3 - A master of stealth and cunning, I am a THIEF (HP: 20, ATTACK: 10) with a personal vendetta 
+        against the ancient evil. My nimbleness and wit make me the perfect agent of vengeance.
+        " 
+
+        read -p "Select your starting class (1/2/3): " class
 
         case $class in 
             1)
@@ -70,39 +70,46 @@ from their tankards and eye you with suspicion.You approach the bar with caution
                 reset_game
         esac
 
-        echo -e "\nHello, $type. Your HP is $hp and your ATTACK is $attack.\n"
+        echo -e "\nBAR KEEP: I see it in your eyes, $type. You carry a heavy burden and a fierce 
+determination. Choose your path wisely, for the realm is fraught with danger. Your HP 
+is $hp, and your ATTACK is $attack. May your quest bring salvation to this land.\n"
         sleep 2
 
         read -p "Press ENTER to leave the tavern and continue on your travels..."
-        echo ""
-        sleep 2
+        clear
+        sleep 1
+
+        echo -e "You step out of the tavern, and the chilly wind cuts through the air. The path 
+ahead is shrouded in uncertainty, but your determination drives you forward. The road 
+meanders through a dark forest, and the ancient trees loom overhead. Eerie sounds echo 
+through the woods, and the feeling of foreboding settles upon you."
 
         # First beast battle 
         beast_hp=30
-        beast_attack=3
+        beast_attack=5
         beast_turn=$((RANDOM % 3))
 
-        echo "As you walk from the village, an eerie feeling of foreboading settles upon you."
-        echo "The path skirts a dark wood. Something moves inside..."
         sleep 2
-        echo -e "\nA ragged wolf-like creature emerges from the darkness. It's red eyes stare at you,
+        echo -e "\nAs you walk deeper into the forest, you notice something moving in the shadows. 
+Suddenly, a ragged wolf-like creature emerges from the darkness, its red eyes fixed upon you, 
 fangs bared, slathering and ready to pounce..."
 
         battle_loop
 
         # First inventory chance
         sleep 2
-        echo "In a nearby bush you find the remains of an unfortunate traveller. Lying next to the remains you find:
+        echo "You quickly scan the surroundings and discover the remains of an unfortunate traveler. 
+Lying next to the remains, you find:
+
         1 - Salted fish (+3 HP)
         2 - Broadsword (+10 ATTACK)
         "
 
-        echo "Will you take anything? (1 or 2)"
-        read pickup
+        read -p "Will you take anything? (1 or 2)" pickup
 
         if [[ $pickup == "1" ]]; then
             hp=$(( $hp + 3 ))
-            echo -e "\nYou eat the cured meat. Your HP is now: $hp."
+            echo -e "\nYou eat the salted fish. Your HP is now: $hp."
         elif [[ $pickup == "2" ]]; then
             attack=$(( $attack + 10 ))
             echo -e "\nYou pickup the broadsword. Your ATTACK is now: $attack."
@@ -112,42 +119,64 @@ fangs bared, slathering and ready to pounce..."
 
         echo ""
         read -p "Press ENTER to continue on your travels..."
+        clear
 
+        sleep 1
+        echo -e "You continue down the path, and the forest slowly begins to thin out. The distant 
+sound of running water fills the air, and you approach a serene, moonlit riverbank. The 
+gentle flow of the river is a stark contrast to the foreboding forest."
 
         # Second enemy encounter
-        #! Adjust enemy_hp, enemy_attack, and description
-        beast_hp=40
-        beast_attack=5
-        echo "While exploring deeper into the cursed forest, you encounter a fearsome creature with 
-glowing eyes and venomous fangs. It's a guardian of the ancient evil and stands in your way."
+        beast_hp=50
+        beast_attack=8
+        
+        sleep 2
+        echo -e "\nAs you kneel by the river to drink, a fearsome creature with glowing eyes and venomous 
+fangs emerges. It's a guardian of the ancient evil, and it stands in your way."
 
         battle_loop
 
         # Second inventory chance
 
-        # Third enemy encounter
-        #! Adjust enemy_hp, enemy_attack, and description
-        beast_hp=60
-        beast_attack=8
-        echo "As you near the heart of darkness, a colossal, shadowy beast emerges from the abyss. It's 
-the embodiment of the ancient evil's malevolence, and it's out for blood."
-
-        battle_loop
-
-        # Third inventory chance
-
-        echo -e "\nYou walk further along the path towards the deserted village."
         sleep 2
-        echo -e "\nYou've reached the village square. It's eerily quiet..."
-        sleep 2
-        echo -e "\nAn eldritch creature emerges, with enormous tattered wings and a demonic look."
-        sleep 2
-        echo -e "\nIt's boss battle time. Get scared."
+        echo "Amid the chaos of battle, you notice a hidden stash beneath a nearby rock:
+        
+        1 - Healing Herbs (+5 HP)
+        2 - Potion of Agility (+5 ATTACK, -5 HP)
+        "
+
+        read -p "Will you take anything? (1 or 2)" pickup
+
+        if [[ $pickup == "1" ]]; then
+            hp=$(( $hp + 5 ))
+            echo -e "\nYou use the healing herbs. Your HP is now: $hp."
+        elif [[ $pickup == "2" ]]; then
+            attack=$(( $attack + 5 ))
+            hp=$(( $hp -5 ))
+            echo -e "\nYou drink the potion of agility. Your ATTACK is now: $attack, your HP is now: $hp."
+        else
+            echo -e "\nYou leave the stash for a more unfortunate traveller and continue walking."
+        fi
+
+        echo ""
+        read -p "Press ENTER to continue your travels..."
+        clear
+
+        sleep 1
+        echo -e "After defeating the guardian, you move on from the riverbank. The path leads to a 
+forsaken village square. The silence is eerie, and the moonlight casts long shadows."
+
+        # Third enemy encounter???
 
         # Boss battle 
         beast_hp=80
         beast_attack=10
         beast_turn=$((RANDOM % 2))
+
+        sleep 2
+        echo -e "\nSuddenly, an enormous eldritch creature with tattered wings and a demonic look emerges. 
+It's the embodiment of the ancient evil's malevolence, and it's out for blood. This is the final  
+battle, and your heart races as you prepare to face this ultimate challenge."
 
         battle_loop
 
@@ -212,6 +241,7 @@ battle_loop() {
 }
 
 reset_game() {
+    clear
     hp=1
     game_loop
 }
